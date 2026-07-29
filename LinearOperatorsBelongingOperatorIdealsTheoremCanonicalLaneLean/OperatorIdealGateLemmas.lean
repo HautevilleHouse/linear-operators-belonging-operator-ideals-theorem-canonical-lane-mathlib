@@ -3,12 +3,11 @@ import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLan
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 
-def gateClosed (A : OperatorIdealAdmittedClass) : Prop :=
+def gateClosed (A : AdmissibleClass) : Prop :=
   A.endpointSatisfied ∨ A.remainderRecorded
 
-theorem gate_from_admissible_class (A : OperatorIdealAdmittedClass) :
-    gateClosed A := by
-  exact A.gateWitness
+theorem gate_from_admissible_class (A : AdmissibleClass) : gateClosed A :=
+  A.gateWitness
 
 end LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 end HautevilleHouse

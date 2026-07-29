@@ -1,14 +1,14 @@
-import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.OperatorIdealClass
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.OperatorIdeals
 
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 
-def bridgeClosed (A : OperatorIdealAdmittedClass) : Prop :=
-  OperatorIdealWitnessClosed A.object
+def bridgeClosed (A : AdmissibleClass) : Prop :=
+  let I := A.object.operatorIdeal
+  OperatorIdealClosed I
 
-theorem bridge_from_admissible_class (A : OperatorIdealAdmittedClass) :
-    bridgeClosed A := by
-  exact A.object.idealPropertyTerm
+theorem bridge_from_admissible_class (A : AdmissibleClass) : bridgeClosed A :=
+  A.object.idealPropertyBridge
 
 end LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 end HautevilleHouse
