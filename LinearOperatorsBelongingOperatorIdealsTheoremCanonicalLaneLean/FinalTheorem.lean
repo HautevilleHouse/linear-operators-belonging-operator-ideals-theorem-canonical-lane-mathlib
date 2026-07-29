@@ -1,4 +1,6 @@
-import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.GateLemmas
+import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.OperatorIdealBridge
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.OperatorIdealGate
 
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
@@ -6,8 +8,7 @@ namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 def ConstrainedOperatorIdealClosure (A : AdmissibleClass) : Prop :=
   bridgeClosed A ∧ gateClosed A
 
-theorem constrained_operator_ideal_endgame (A : AdmissibleClass) :
-    ConstrainedOperatorIdealClosure A := by
+theorem constrained_operator_ideal_endgame (A : AdmissibleClass) : ConstrainedOperatorIdealClosure A := by
   exact And.intro (bridge_from_admissible_class A) (gate_from_admissible_class A)
 
 end LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean

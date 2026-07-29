@@ -3,28 +3,29 @@ import canonicalLaneMathlib.AdmissibleClass
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 
-structure OperatorIdeal where
-  carrier : Type u
-  zero : carrier
-  add : carrier → carrier → carrier
-  smul : ℂ → carrier → carrier
-  norm : carrier → ℝ
-  idealProperty : Prop
-  normedAddCommGroup : NormedAddCommGroup carrier
+structure OperatorIdealClass where
+  ideal : Type u
+  membershipCriterion : Prop
+  closedUnderAddition : Prop
   closedUnderMultiplication : Prop
+  closedUnderAdjoint : Prop
   containsFiniteRank : Prop
-  idealPropertyTerm : idealProperty
-  closedUnderMultiplicationTerm : closedUnderMultiplication
-  containsFiniteRankTerm : containsFiniteRank
 
-structure OperatorIdealAdmittedClass where
-  object : OperatorIdeal
-  endpointSatisfied : Prop
-  remainderRecorded : Prop
-  gateWitness : endpointSatisfied ∨ remainderRecorded
+structure OperatorIdealEvidence (I : OperatorIdealClass) where
+  membershipCriterionClosed : I.membershipCriterion
+  closedUnderAdditionClosed : I.closedUnderAddition
+  closedUnderMultiplicationClosed : I.closedUnderMultiplication
+  closedUnderAdjointClosed : I.closedUnderAdjoint
+  containsFiniteRankClosed : I.containsFiniteRank
 
-def operatorIdealAdmittedClosure (A : OperatorIdealAdmittedClass) : Prop :=
-  OperatorIdealWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
+def OperatorIdealClosed (I : OperatorIdealClass) : Prop :=
+  I.membershipCriterion ∧ I.closedUnderAddition ∧ I.closedUnderMultiplication ∧ I.closedUnderAdjoint ∧ I.containsFiniteRank
+
+theorem operator_ideal_closed_from_evidence (I : OperatorIdealClass) (E : OperatorIdealEvidence I) : OperatorIdealClosed I := by
+  exact And.intro E.membershipCriterionClosed
+    (And.intro E.closedUnderAdditionClosed
+      (And.intro E.closedUnderMultiplicationClosed
+        (And.intro E.closedUnderAdjointClosed E.containsFiniteRankClosed)))
 
 end LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 end HautevilleHouse
