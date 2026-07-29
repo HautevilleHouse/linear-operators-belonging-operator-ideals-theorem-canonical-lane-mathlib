@@ -1,4 +1,4 @@
-import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.BridgeLemmas
 
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean

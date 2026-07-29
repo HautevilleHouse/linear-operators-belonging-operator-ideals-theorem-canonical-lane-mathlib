@@ -1,4 +1,4 @@
-import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.GateLemmas
 
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean

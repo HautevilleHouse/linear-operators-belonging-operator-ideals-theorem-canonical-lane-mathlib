@@ -1,24 +1,37 @@
-import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean.OperatorIdealProperties
 
 namespace HautevilleHouse
 namespace LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 
-structure SchattenIdeal where
+structure SchattenIdealPackage {O : OperatorIdealAdmittedObject}
+    (P : OperatorIdealPropertiesPackage O) where
   exponent : ℝ
-  normDefinition : Type
-  closedUnderAddition : Prop
-  closedUnderScalarMultiplication : Prop
-  closedUnderComposition : Prop
+  finiteTraceCondition : Prop
+  holderInequality : Prop
+  dualityProperty : Prop
 
-def SchattenIdealEvidence (S : SchattenIdeal) : Prop :=
-  S.closedUnderAddition ∧ S.closedUnderScalarMultiplication ∧ S.closedUnderComposition
+structure SchattenIdealEvidence {O : OperatorIdealAdmittedObject}
+    {P : OperatorIdealPropertiesPackage O}
+    (S : SchattenIdealPackage P) where
+  exponentClosed : S.exponent > 0
+  finiteTraceConditionClosed : S.finiteTraceCondition
+  holderInequalityClosed : S.holderInequality
+  dualityPropertyClosed : S.dualityProperty
 
-def SchattenIdealClosed (S : SchattenIdeal) : Prop :=
-  S.closedUnderAddition ∧ S.closedUnderScalarMultiplication ∧ S.closedUnderComposition
+def SchattenIdealClosed {O : OperatorIdealAdmittedObject}
+    {P : OperatorIdealPropertiesPackage O}
+    (S : SchattenIdealPackage P) : Prop :=
+  (S.exponent > 0) ∧ S.finiteTraceCondition ∧
+  S.holderInequality ∧ S.dualityProperty
 
-theorem schatten_ideal_closed (S : SchattenIdeal) (E : SchattenIdealEvidence S) :
+theorem schatten_ideal_closed_from_evidence
+    {O : OperatorIdealAdmittedObject}
+    {P : OperatorIdealPropertiesPackage O}
+    (S : SchattenIdealPackage P) (E : SchattenIdealEvidence S) :
     SchattenIdealClosed S := by
-  exact And.intro E.1 (And.intro E.2.1 E.2.2)
+  exact And.intro E.exponentClosed
+    (And.intro E.finiteTraceConditionClosed
+      (And.intro E.holderInequalityClosed E.dualityPropertyClosed))
 
 end LinearOperatorsBelongingOperatorIdealsTheoremCanonicalLaneLean
 end HautevilleHouse
